@@ -10,11 +10,12 @@ services:
       - .:/app
       - /app/node_modules
   test:
-    stdin_open: true
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: npm test
+    command: npm test -- --watchAll=false
+    environment:
+      CI: "true"
     volumes:
       - .:/app
       - /app/node_modules
