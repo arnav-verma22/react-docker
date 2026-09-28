@@ -21,14 +21,14 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker compose -f docker-compose.yml build
+          docker compose -f docker-compose-dev.yml build
 
       - name: Run tests
         run: |
-          docker compose -f docker-compose.yml run --rm -T test
+          docker compose -f docker-compose-dev.yml run --rm -T test
         
       - name: Generate Deployment Package
-        run: zip -r deploy.zip . -x "*.git*" "node_modules/*" "tests/*"
+        run: zip -r deploy.zip . -x "*.git*" "node_modules/*" "tests/*" "build/*"
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
